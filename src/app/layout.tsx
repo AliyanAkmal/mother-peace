@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import DashboardSidebar from "@/components/sidebar";
+import Header from "@/components/header";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+   display: "swap"
 });
 
 const geistMono = Geist_Mono({
@@ -25,9 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex items-start justify-between`}
       >
-        {children}
+        <DashboardSidebar />
+        <main className="w-full h-full ml-[300px] ">
+          <Header />
+          {children}</main>
       </body>
     </html>
   );
