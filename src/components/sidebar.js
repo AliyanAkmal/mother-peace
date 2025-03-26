@@ -34,18 +34,13 @@ const menulist = [
       { link: "/achievements", text: "All Achievements" },
       { link: "/achievements", text: "Monthly Challenges" },
       { link: "/achievements", text: "Leaderboard" },
-    ],
-  },
-  {
-    link: "/profile",
-    text: "Profile",
-    subMenu: [
-      { link: "/profile", text: "Account Setting" },
-      { link: "/profile", text: "Privacy" },
-      { link: "/profile", text: "Activity" },
-    ],
-  },
-];
+    ], },
+  { link: "/profile", text: "Profile", subMenu: [
+      { link: "/profile/accountsrtting", text: "Account Setting" },
+      { link: "/profile/privacy", text: "Privacy" },
+      { link: "/profile/notification", text: "Notifications" },
+    ], },
+]
 
 import PageLogo from "@/components/logo";
 import { usePathname } from "next/navigation";

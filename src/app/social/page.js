@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import FriendsList from "@/components/friendslist"
-export default function Profile() {
+export default function Social() {
   return (
     <div className="p-3 bg-[#F8F8F8]">
       <div className="flex items-end justify-between flex-wrap gap-4 mb-4">
