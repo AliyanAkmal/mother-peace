@@ -91,7 +91,7 @@ export default function AskMother() {
             <MotherCards />
           </div>
       <div className="relative flex items-center w-full" >
-             <Input placeholder="Type Content Here[]" className="pl-4 b-none  "/>
+             <Input placeholder="Type Content Here[]" className="pl-4 border border-gray-200 "/>
           <Send size={20} strokeWidth={1} className="absolute right-3 top-1/2 -translate-y-1/2 rounded-[7px]" />
           </div>
          
