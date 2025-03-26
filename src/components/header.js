@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <div className="grid grid-cols-3 border-b p-2 bg-[#EAEAEA]">
       <div className="relative flex items-center w-full" >
-        <Input placeholder="Search" className="pl-4 b-none bg-white " />
+        <Input placeholder="Search" className="pl-4 b-none bg-white border-none " />
          <Image
         src={Vector}
         alt="Icon"

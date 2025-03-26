@@ -33,9 +33,9 @@ const menulist = [
       { link: "/achievements", text: "Leaderboard" },
     ], },
   { link: "/profile", text: "Profile", subMenu: [
-      { link: "/profile", text: "Account Setting" },
-      { link: "/profile", text: "Privacy" },
-      { link: "/profile", text: "Activity" },
+      { link: "/profile/accountsrtting", text: "Account Setting" },
+      { link: "/profile/privacy", text: "Privacy" },
+      { link: "/profile/notification", text: "Notifications" },
     ], },
 ]
 
@@ -123,4 +123,3 @@ export default function DashboardSidebar() {
     </div>
   )
 }
-
