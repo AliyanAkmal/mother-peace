@@ -1,8 +1,8 @@
-"use client"
-import { useState } from "react"
-import img from "@/assets/Subtract.svg"
-import Image from "next/image"
-import { ChevronDown } from "lucide-react"
+"use client";
+import { useState } from "react";
+import img from "@/assets/Subtract.svg";
+import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 
 import {
   Sidebar,
@@ -14,7 +14,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarProvider,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 const menulist = [
   { link: "/", text: "Dashboard" },
@@ -22,12 +22,15 @@ const menulist = [
   {
     text: "Social",
     subMenu: [
-      { link: "/social", text: "Friends" },
-      { link: "/social", text: "Tribes" },
-      { link: "/social", text: "Activity" },
+      { link: "/social/friends", text: "Friends" },
+      { link: "/social/tribes", text: "Tribes" },
+      { link: "/social/activity", text: "Activity" },
     ],
   },
-  { link: "/achievements", text: "Achievements", subMenu: [
+  {
+    link: "/achievements",
+    text: "Achievements",
+    subMenu: [
       { link: "/achievements", text: "All Achievements" },
       { link: "/achievements", text: "Monthly Challenges" },
       { link: "/achievements", text: "Leaderboard" },
@@ -39,17 +42,18 @@ const menulist = [
     ], },
 ]
 
-import PageLogo from "@/components/logo"
+import PageLogo from "@/components/logo";
+import { usePathname } from "next/navigation";
 
 export default function DashboardSidebar() {
-  const [openMenus, setOpenMenus] = useState({})
-
+  const [openMenus, setOpenMenus] = useState({});
+  const pathname = usePathname();
   const toggleSubmenu = (menuText) => {
     setOpenMenus((prev) => ({
       ...prev,
       [menuText]: !prev[menuText],
-    }))
-  }
+    }));
+  };
 
   return (
     <div className="fixed flex flex-col items-center min-w-[300px] border-r min-h-screen p-4 ">
@@ -59,7 +63,7 @@ export default function DashboardSidebar() {
           <h1 className="text-base text-[#28303F] font-medium">Main Menu</h1>
           <SidebarProvider>
             <Sidebar className="w-full bg-white" collapsible="none">
-              <SidebarContent >
+              <SidebarContent>
                 <SidebarMenu className="flex flex-col gap-5">
                   {menulist.map((menu, index) => (
                     <SidebarMenuItem key={index}>
@@ -69,8 +73,15 @@ export default function DashboardSidebar() {
                             onClick={() => toggleSubmenu(menu.text)}
                             className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer"
                           >
-                            <Image src={img} alt="Logo" width={20} height={20} />
-                            <span className="text-base text-[#828282] font-medium p-2">{menu.text}</span>
+                            <Image
+                              src={img}
+                              alt="Logo"
+                              width={20}
+                              height={20}
+                            />
+                            <span className="text-base text-[#828282] font-medium p-2">
+                              {menu.text}
+                            </span>
                             <ChevronDown
                               className={`ml-auto h-4 w-4 transition-transform ${
                                 openMenus[menu.text] ? "rotate-180" : ""
@@ -82,13 +93,26 @@ export default function DashboardSidebar() {
                             <SidebarMenuSub className=" border-none">
                               {menu.subMenu.map((subItem, subIndex) => (
                                 <SidebarMenuSubItem key={subIndex}>
-                                  <SidebarMenuSubButton asChild>
+                                  <SidebarMenuSubButton
+                                    asChild
+                                    isActive={pathname === subItem.link}
+                                  >
                                     <a
                                       href={subItem.link}
                                       className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer"
                                     >
-                                       <ChevronDown className="rotate-270"/>
-                                      <span className="text-base text-[#828282] font-medium">{subItem.text}</span>
+                                      {pathname === subItem.link ? (
+                                        <ChevronDown className="rotate-270" />
+                                      ) : null}
+                                      <span
+                                        className={`${
+                                          pathname === subItem.link
+                                            ? "text-black"
+                                            : "text-gray-500"
+                                        }text-base  font-medium text-gray-500`}
+                                      >
+                                        {subItem.text}
+                                      </span>
                                     </a>
                                   </SidebarMenuSubButton>
                                 </SidebarMenuSubItem>
@@ -102,8 +126,15 @@ export default function DashboardSidebar() {
                             href={menu.link}
                             className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer"
                           >
-                            <Image src={img} alt="Logo" width={20} height={20} />
-                            <span className="text-base text-[#828282] font-medium p-2">{menu.text}</span>
+                            <Image
+                              src={img}
+                              alt="Logo"
+                              width={20}
+                              height={20}
+                            />
+                            <span className="text-base text-[#828282] font-medium p-2">
+                              {menu.text}
+                            </span>
                           </a>
                         </SidebarMenuButton>
                       )}
@@ -121,5 +152,5 @@ export default function DashboardSidebar() {
         <h3>Teachings of Dr. Hak Ja Han Moon</h3>
       </div>
     </div>
-  )
+  );
 }
