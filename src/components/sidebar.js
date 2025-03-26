@@ -31,9 +31,9 @@ const menulist = [
     link: "/achievements",
     text: "Achievements",
     subMenu: [
-      { link: "/achievements", text: "All Achievements" },
-      { link: "/achievements", text: "Monthly Challenges" },
-      { link: "/achievements", text: "Leaderboard" },
+      { link: "/achievements/allachievements", text: "All Achievements" },
+      { link: "/achievements/monthlychallenges", text: "Monthly Challenges" },
+      { link: "/achievements/leaderboard", text: "Leaderboard" },
     ], },
   { link: "/profile", text: "Profile", subMenu: [
       { link: "/profile/accountsrtting", text: "Account Setting" },
