@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import AchivementsMap from "@/components/achivementsmap"
-import cardsData from "@/components/achivementsdata"
+import cardsData from "@/components/achievementsinfo"
 export default function AchievementCards() {
   return (
     <div className="bg-[#28303f] space-y-8 rounded-lg p-8 text-white">
