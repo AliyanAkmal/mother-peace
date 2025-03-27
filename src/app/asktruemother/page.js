@@ -7,13 +7,11 @@ import { SquareArrowOutUpRight } from "lucide-react";
 import { BookOpen } from "lucide-react";
 import MotherCards from "@/components/MotherCards"
 import TabsMother from "@/components/mothertabs"
+import MotherModal from "@/components/mothermodal"
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 
@@ -27,21 +25,17 @@ export default function AskMother() {
           <h3 className="text-[#28303F] text-xl">Ask questions about Dr. Hak Ja Han Moon's teachings</h3>
         </div>
         
-        <Dialog>
-          <DialogTrigger><Button variant="custom" className="py-6">
-              <BellDot size={20} strokeWidth={1.25} />
-              Get Daily Quotes
-            </Button></DialogTrigger>
-            <DialogContent>
-          <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your account
-            and remove your data from our servers.
-          </DialogDescription>
-          </DialogHeader>
-          </DialogContent>
-        </Dialog>
+       <Dialog>
+      <DialogTrigger>
+        <Button  variant="custom" className="py-6">
+          <BellDot size={20} strokeWidth={1.25} />
+          Get Daily Quotes
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <MotherModal />
+      </DialogContent>
+    </Dialog>
 
       </div>
 
