@@ -21,8 +21,8 @@ export default function Leaderboard() {
         <h4 className="text-xl text-[#28303F]">John Doe</h4>
       </div>
       <div className="bg-white rounded-lg p-6 lg:p-8 space-y-6">
-        <div className="flex items-center gap-3">
-          <Globe size={25} strokeWidth={1.5} stroke="#28303F" />
+        <div className="flex items-start  gap-3">
+          <Globe size={25} strokeWidth={1.5} stroke="#28303F" className="mt-[5px]" />
           <div>
             <h4 className="text-[24px] text-[#28303F] font-semibold">
               Global Leaderboard
@@ -43,7 +43,7 @@ export default function Leaderboard() {
             >
               <div className="flex items-center gap-4">
                <div
-                className={`w-8 h-8 flex items-center justify-center rounded-fulltext-sm font-semibold ${
+                cla ssName={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-semibold ${
                   index === 0
                     ? "bg-[#F4B940]  text-white "
                     : index === 1
@@ -80,7 +80,7 @@ export default function Leaderboard() {
           ))}
         </div>
       </div>
-      <p className="text-[#5E8DE5] text-sm text-center">
+      <p className="text-[#5E8DE5] text-sm  ml-4">
         Leaderboard updates daily. The top 3 users at the end of each month
         receive special rewards.
       </p>
