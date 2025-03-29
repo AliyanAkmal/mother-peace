@@ -178,10 +178,10 @@ export default function ProfileForm() {
       <div className="space-y-3">
         <h3 className="text-lg font-bold text-[#28303F]">Security</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="space-y-2 col-span-2">
+          <div className="space-y-2  col-span-1 lg:col-span-2">
             <h4 className="text-base text-[#28303F] font-medium">Current Password</h4>
             <Input
-              className="h-12 w-[49%] mb-2"
+              className="h-12 lg:w-[49%] mb-2"
               name="currentPassword"
               type="password"
               value={formik.values.currentPassword}

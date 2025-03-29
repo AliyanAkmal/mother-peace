@@ -24,7 +24,7 @@ export default function Activity() {
   ];
   return (
     <SocialLayout>
-      <div className="bg-white px-4 py-6 rounded-[12px]">
+      <div className=" px-4 py-6 bg-white rounded-[12px]">
         <div className="mb-8">
           <h1 className="text-[24px] text-[#28303F] font-[500]">
             Friend Activity
