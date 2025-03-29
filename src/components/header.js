@@ -1,29 +1,67 @@
 import Image from "next/image";
 import Vector from "@/assets/Vector.svg";
 import notification from "@/assets/notification.svg";
+import NotificationsPopOver from "@/components/notificationspopover"
+import ProfilePopver from "@/components/profilepopover"
+import InboxComponent from "@/components/inboxpopover"
 import Group from "@/assets/Group.svg";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "./ui/input";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+
 export default function Header() {
   return (
-    <div className="grid grid-cols-3 border-b p-2 bg-[#EAEAEA]">
-      <div className="relative flex items-center w-full" >
-        <Input placeholder="Search" className="pl-4 b-none bg-white border-none " />
-         <Image
-        src={Vector}
-        alt="Icon"
-        width={20}
-        height={20}
-        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-[7px]"
-      />
-      </div>     
+    <div className="grid grid-cols-3 border-b p-3 bg-[#EAEAEA]">
+      <div className="relative flex items-center w-full">
+        <Input
+          placeholder="Search"
+          className="pl-10 bg-white border-none focus:outline-none"
+        />
+        <Image
+          src={Vector}
+          alt="Search Icon"
+          width={20}
+          height={20}
+          className="absolute left-3 top-1/2 -translate-y-1/2"
+        />
+      </div>
+
       <div className="flex gap-6 col-span-2 items-center justify-end">
-        <Image src={Group} alt="Logo" width={18} height={18} />
-        <Image src={notification} alt="Logo" width={17} height={17} />
-        <Avatar className="w-12 h-12">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        
+        <Popover>
+          <PopoverTrigger>
+            <Image src={Group} alt="Group" width={18} height={18} className="cursor-pointer" />
+          </PopoverTrigger>
+          <PopoverContent className="w-40">
+            <InboxComponent/>
+          </PopoverContent>
+        </Popover>
+
+        <Popover>
+          <PopoverTrigger>
+            <Image src={notification} alt="Notifications" width={17} height={17} className="cursor-pointer" />
+          </PopoverTrigger>
+          <PopoverContent className=" ">
+            <NotificationsPopOver/>
+          </PopoverContent>
+        </Popover>
+
+        <Popover>
+          <PopoverTrigger>
+            <Avatar className="w-10 h-10 cursor-pointer">
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </PopoverTrigger>
+          <PopoverContent className="w-40">
+            <ProfilePopver/>
+          </PopoverContent>
+        </Popover>
+
       </div>
     </div>
   );
