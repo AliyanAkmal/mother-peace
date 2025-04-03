@@ -2,6 +2,9 @@ import { SquarePen } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import LinkAccounts from "@/components/linkaccounts"
 import ProfileForm from "@/components/profileform"
+import hello from "@/assets/woman.svg"
+import Image from "next/image";
+
 
 export default function AccountSetting() {
   return (
@@ -16,10 +19,9 @@ export default function AccountSetting() {
 
                 <div className="rounded-[15px] p-4 flex gap-12 flex-col relative justify-center bg-white"> 
                      <div className="relative m-auto">
-                        <Avatar className="w-40 h-40">
-                            <AvatarImage src="https://github.com/shadcn.png" />
-                            <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
+                         <Image
+                         src={hello}
+                           />
                         <SquarePen 
                             className="absolute cursor-pointer bottom-4 right-2 translate-x-1/2 translate-y-1/2 " 
                             size={20} 
@@ -38,7 +40,6 @@ export default function AccountSetting() {
 
             <div   className="rounded-[15px] p-4 col-span-2 bg-[#ffffff]">
                 <ProfileForm />
-
             </div>
         </div>
     </div>

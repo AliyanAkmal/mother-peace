@@ -39,7 +39,7 @@ export default function NotificationsPopOver() {
 
       <div>
         {notifications.map((notification) => (
-          <div key={notification.id} className="flex items-center justify-between px-4 py-3 border-b last:border-b-0">
+          <div key={notification.id} className="flex items-center justify-between px-4 py-3 ">
             <div className="flex items-center gap-3">
               <Image
                 src={notification.image || "/placeholder.svg"}

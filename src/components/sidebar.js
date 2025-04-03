@@ -1,20 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import img from "@/assets/Subtract.svg";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
-
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-  SidebarProvider,
-} from "@/components/ui/sidebar";
+import { ChevronDown, ChevronLeft } from "lucide-react";
+import { useSidebar } from "@/contexts/sidebar-context";
+import { usePathname, useRouter } from "next/navigation";
+import PageLogo from "@/components/logo";
+import Link from "next/link";
 
 const menulist = [
   { link: "/", text: "Dashboard" },
@@ -28,26 +20,40 @@ const menulist = [
     ],
   },
   {
-    link: "/achievements",
     text: "Achievements",
     subMenu: [
       { link: "/achievements/allachievements", text: "All Achievements" },
       { link: "/achievements/monthlychallenges", text: "Monthly Challenges" },
       { link: "/achievements/leaderboard", text: "Leaderboard" },
-    ], },
-  { link: "/profile", text: "Profile", subMenu: [
-      { link: "/profile/accountsrtting", text: "Account Setting" },
+    ], 
+  },
+  { 
+    text: "Profile",
+    subMenu: [
+      { link: "/profile/accountsetting", text: "Account Setting" },
       { link: "/profile/privacy", text: "Privacy" },
       { link: "/profile/notification", text: "Notifications" },
-    ], },
-]
-
-import PageLogo from "@/components/logo";
-import { usePathname } from "next/navigation";
+    ], 
+  },
+];
 
 export default function DashboardSidebar() {
   const [openMenus, setOpenMenus] = useState({});
+  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { isCollapsed, toggleSidebar } = useSidebar();
+
+  // Check for mobile view
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const toggleSubmenu = (menuText) => {
     setOpenMenus((prev) => ({
       ...prev,
@@ -55,102 +61,98 @@ export default function DashboardSidebar() {
     }));
   };
 
-  return (
-    <div className="fixed flex flex-col items-center min-w-[300px] border-r min-h-screen p-4 ">
-      <div className="flex flex-col space-y-10">
-        <PageLogo />
-        <div className="flex gap-4 flex-col ">
-          <h1 className="text-base text-[#28303F] font-medium">Main Menu</h1>
-          <SidebarProvider>
-            <Sidebar className="w-full bg-white" collapsible="none">
-              <SidebarContent>
-                <SidebarMenu className="flex flex-col gap-5">
-                  {menulist.map((menu, index) => (
-                    <SidebarMenuItem key={index}>
-                      {menu.subMenu ? (
-                        <>
-                          <SidebarMenuButton
-                            onClick={() => toggleSubmenu(menu.text)}
-                            className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer"
-                          >
-                            <Image
-                              src={img}
-                              alt="Logo"
-                              width={20}
-                              height={20}
-                            />
-                            <span className="text-base text-[#828282] font-medium p-2">
-                              {menu.text}
-                            </span>
-                            <ChevronDown
-                              className={`ml-auto h-4 w-4 transition-transform ${
-                                openMenus[menu.text] ? "rotate-180" : ""
-                              }`}
-                            />
-                          </SidebarMenuButton>
+  // Close sidebar on mobile when a link is clicked
+  const handleLinkClick = () => {
+    if (isMobile) {
+      toggleSidebar();
+    }
+  };
 
-                          {openMenus[menu.text] && (
-                            <SidebarMenuSub className=" border-none">
-                              {menu.subMenu.map((subItem, subIndex) => (
-                                <SidebarMenuSubItem key={subIndex}>
-                                  <SidebarMenuSubButton
-                                    asChild
-                                    isActive={pathname === subItem.link}
-                                  >
-                                    <a
-                                      href={subItem.link}
-                                      className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer"
-                                    >
-                                      {pathname === subItem.link ? (
-                                        <ChevronDown className="rotate-270" />
-                                      ) : null}
-                                      <span
-                                        className={`${
-                                          pathname === subItem.link
-                                            ? "text-black"
-                                            : "text-gray-500"
-                                        }text-base  font-medium text-gray-500`}
-                                      >
-                                        {subItem.text}
-                                      </span>
-                                    </a>
-                                  </SidebarMenuSubButton>
-                                </SidebarMenuSubItem>
-                              ))}
-                            </SidebarMenuSub>
-                          )}
-                        </>
-                      ) : (
-                        <SidebarMenuButton asChild>
-                          <a
-                            href={menu.link}
-                            className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer"
+  return (
+    <div className={`
+      fixed h-screen z-20 transition-all duration-300
+      ${isCollapsed ? "w-[70px]" : "w-[300px]"}
+      ${isMobile && !isCollapsed ? "inset-0 z-50 bg-white" : "overflow-auto"}
+      border-r bg-white shadow-sm flex flex-col
+    `}>
+  
+
+      <PageLogo />
+
+      <div className={`flex-1 overflow-y-auto ${isCollapsed ? "hidden" : ""}`}>
+        <div className="p-4 mt-4">
+          <h2 className="text-base text-[#28303F] font-medium mb-4">Main Menu</h2>
+          <nav className="flex flex-col gap-1">
+            {menulist.map((menu, index) => (
+              <div key={index} className="mb-1">
+                {menu.subMenu ? (
+                  <>
+                    <button
+                      onClick={() => toggleSubmenu(menu.text)}
+                      className={`
+                        flex items-center w-full p-2 rounded-md hover:bg-gray-100
+                        ${pathname.startsWith(menu.link || `/${menu.text.toLowerCase()}`) ? "bg-gray-100" : ""}
+                      `}
+                    >
+                      <Image src={img} alt="" width={20} height={20} />
+                      <span className="ml-3 text-[#828282] font-medium">
+                        {menu.text}
+                      </span>
+                      <ChevronDown
+                        className={`ml-auto h-4 w-4 transition-transform ${
+                          openMenus[menu.text] ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {openMenus[menu.text] && (
+                      <div className="ml-10 mt-1 space-y-1">
+                        {menu.subMenu.map((subItem, subIndex) => (
+                          <Link
+                            key={subIndex}
+                            href={subItem.link}
+                            onClick={handleLinkClick}
+                            className={`
+                              block p-2 rounded-md text-sm
+                              ${pathname === subItem.link
+                                ? "text-black font-medium"
+                                : "text-gray-500 hover:text-black"
+                              }
+                            `}
                           >
-                            <Image
-                              src={img}
-                              alt="Logo"
-                              width={20}
-                              height={20}
-                            />
-                            <span className="text-base text-[#828282] font-medium p-2">
-                              {menu.text}
-                            </span>
-                          </a>
-                        </SidebarMenuButton>
-                      )}
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
-              </SidebarContent>
-            </Sidebar>
-          </SidebarProvider>
+                            {subItem.text}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={menu.link}
+                    onClick={handleLinkClick}
+                    className={`
+                      flex items-center p-2 rounded-md hover:bg-gray-100
+                      ${pathname === menu.link ? "bg-gray-100" : ""}
+                    `}
+                  >
+                    <Image src={img} alt="" width={20} height={20} />
+                    <span className="ml-3 text-[#828282] font-medium">
+                      {menu.text}
+                    </span>
+                  </Link>
+                )}
+              </div>
+            ))}
+          </nav>
         </div>
       </div>
 
-      <div className="absolute bottom-40  ">
-        <h3>© 2025 Family Federation</h3>
-        <h3>Teachings of Dr. Hak Ja Han Moon</h3>
-      </div>
+      {!isCollapsed && (
+        <div className="p-4 text-xs text-gray-500 ">
+          <p>© 2025 Family Federation</p>
+          <p>Teachings of Dr. Hak Ja Han Moon</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SidebarProvider } from "@/contexts/sidebar-context";
+import "./globals.css";
 import DashboardSidebar from "@/components/sidebar";
 import Header from "@/components/header";
-import "./globals.css";
+import ContentWrapper from "@/app/wrapper"; // New client component
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-   display: "swap"
+  display: "swap"
 });
 
 const geistMono = Geist_Mono({
@@ -27,13 +29,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex items-start justify-between`}
-      >
-        <DashboardSidebar />
-        <main className="w-full h-full ml-[300px] ">
-          <Header />
-          {children}</main>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <SidebarProvider>
+          <div className="flex">
+            <DashboardSidebar />
+            <div className="flex-1 flex flex-col">
+              <Header />
+              <ContentWrapper>
+                {children}
+              </ContentWrapper>
+            </div>
+          </div>
+        </SidebarProvider>
       </body>
     </html>
   );
