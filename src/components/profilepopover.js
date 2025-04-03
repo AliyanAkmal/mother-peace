@@ -33,7 +33,7 @@ const menuItems = [
 export default function ProfilePopver() {
   return (
     <div className="bg-white rounded-xl w-1000 max-w-md shadow-sm">
-      <div className="px-4 py-4 border-b">
+      <div className="px-4 py-4 border-b-[1px]">
         <h2 className="font-medium text-xl text-gray-900">Profile</h2>
       </div>
       <div className="py-2">

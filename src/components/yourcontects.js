@@ -31,11 +31,11 @@ const contectsData = [
 
 export default function YourContects() {
   return (
-    <div className="bg-white p-4 rounded-lg">
+    <div className="bg-white  rounded-lg">
       <div className="flex justify-between">
         <div>
-          <h3 className="text-2xl text-[#28303F] font-medium">Your Journey</h3>
-          <span className="text-sm text-[#828282]">People to share blessings with</span>
+          <h3 className="sm:text-2xl text-xl   text-[#28303F] font-medium">Your Journey</h3>
+          <span className="text-sm sm:text-base  text-[#828282]">People to share blessings with</span>
         </div>
         <div className="bg-black rounded-xl items-center p-2 h-fit cursor-pointer">
           <Plus className="text-white" />

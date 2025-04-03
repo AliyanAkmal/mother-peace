@@ -64,49 +64,55 @@ const journeyData = [
 
 const YourJourney = () => {
   return (
-    <div className="bg-white p-4 rounded-lg">
-      <h3 className="text-2xl text-[#28303F] font-medium">Your Journey</h3>
+    <div className="bg-white  rounded-lg">
+      <h3 className="text-xl sm:text-2xl text-[#28303F] font-medium">Your Journey</h3>
       <Tabs defaultValue="Achievements" className="w-full mt-4">
-        <TabsList className="flex gap-4">
-          <TabsTrigger value="Achievements">Achievements</TabsTrigger>
-          <TabsTrigger value="Challenges">Challenges</TabsTrigger>
-          <TabsTrigger value="Activity">Activity</TabsTrigger>
+        <TabsList className="flex flex-wrap h-fit gap-2 rounded-4xl p-2 sm:gap-4">
+          <TabsTrigger value="Achievements" className="text-xs sm:text-sm p-2 ">Achievements</TabsTrigger>
+          <TabsTrigger value="Challenges" className="text-xs sm:text-sm p-2">Challenges</TabsTrigger>
+          <TabsTrigger value="Activity" className="text-xs sm:text-sm p-2">Activity</TabsTrigger>
         </TabsList>
-        <ScrollArea className="h-[300px] w-full rounded-md pt-2">
+        <ScrollArea className="h-[300px] sm:h-[350px] w-full rounded-md pt-2">
           <TabsContent value="Achievements">
             {journeyData.map((data, index) => (
-              <div key={index} className="mb-6 pr-5">
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-3">
+              <div key={index} className="mb-4 sm:mb-6 pr-2 sm:pr-5">
+                <div className="flex justify-between items-center gap-2">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <div
-                      className={`p-2 rounded-full ${
+                      className={`p-1 sm:p-2 rounded-full ${
                         data.completed ? "bg-[#5a86d8]" : "bg-[#D9D9D9]"
                       }`}
                     >
-                      <Image src={data.iconSrc} alt="Icon" width={20} height={20} />
+                      <Image 
+                        src={data.iconSrc} 
+                        alt="Icon" 
+                        width={16} 
+                        height={16}
+                        className="w-4 h-4 sm:w-5 sm:h-5"
+                      />
                     </div>
-                    <div>
-                      <h1 className="text-base font-medium">{data.task}</h1>
-                      <h1 className="text-sm text-[#828282]">{data.taskMsg}</h1>
+                    <div className="flex-1 min-w-0">
+                      <h1 className="text-sm sm:text-base font-medium truncate">{data.task}</h1>
+                      <h1 className="text-xs sm:text-sm text-[#828282] truncate">{data.taskMsg}</h1>
                     </div>
                   </div>
                   {data.completed ? (
                     <Button
                       variant="custom"
-                      className="rounded-full text-xs w-fit"
+                      className="rounded-full text-xs px-2 sm:px-3 py-1 h-auto"
                     >
                       Complete
                     </Button>
                   ) : (
-                    <p className="text-sm text-[#828282] ">
-                        <span className="text-[#5E8DE5]">{data.progress}</span>/{data.total}
+                    <p className="text-xs sm:text-sm text-[#828282] whitespace-nowrap">
+                      <span className="text-[#5E8DE5]">{data.progress}</span>/{data.total}
                     </p>
                   )}
                 </div>
-                <div className="ml-12 mt-2">
-                     {!data.completed && (
-                  <Progress value={(data.progress / data.total) * 100} />
-                )}
+                <div className="ml-8 sm:ml-12 mt-1 sm:mt-2">
+                  {!data.completed && (
+                    <Progress value={(data.progress / data.total) * 100} className="h-1 sm:h-2" />
+                  )}
                 </div>
               </div>
             ))}
@@ -116,7 +122,7 @@ const YourJourney = () => {
           <TabsContent value="Activity">Activity section</TabsContent>
         </ScrollArea>
       </Tabs>
-        <hr className="mt-10 mb-3"  />
+      <hr className="mt-6 sm:mt-10 mb-3" />
     </div>
   );
 };

@@ -39,7 +39,7 @@ export default function InboxComponent() {
 
       <div>
         {messages.map((message) => (
-          <div key={message.id} className="flex items-start justify-between px-4 py-3 border-b last:border-b-0">
+          <div key={message.id} className="flex items-start justify-between px-4 py-3 ">
             <div className="flex items-start gap-3">
               <Image
                 src={message.image || "/placeholder.svg"}
@@ -49,17 +49,17 @@ export default function InboxComponent() {
                 className="rounded-full object-cover mt-1"
               />
               <div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between">
                   <p className="font-medium text-gray-900">{message.sender}</p>
+                  <span className="text-xs text-gray-400 ">{message.time}</span>
                 </div>
                 <p className="text-sm text-gray-500 mt-0.5 pr-4">{message.content}</p>
               </div>
             </div>
 
-            <div className="flex items-start gap-2">
-              <span className="text-xs text-gray-400 mt-1.5 mr-1">{message.time}</span>
+            <div className="flex items-start mt-1 gap-2">
               <button>
-                <MoreVertical size={20} className="text-gray-500" />
+                <MoreVertical size={25} className="text-gray-500" />
               </button>
             </div>
           </div>
