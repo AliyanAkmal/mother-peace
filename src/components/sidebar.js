@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import img from "@/assets/Subtract.svg";
 import Image from "next/image";
-import { ChevronDown, ChevronLeft } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useSidebar } from "@/contexts/sidebar-context";
 import { usePathname, useRouter } from "next/navigation";
 import PageLogo from "@/components/logo";
@@ -21,6 +21,7 @@ const menulist = [
   },
   {
     text: "Achievements",
+    link: "/achievements",
     subMenu: [
       { link: "/achievements/allachievements", text: "All Achievements" },
       { link: "/achievements/monthlychallenges", text: "Monthly Challenges" },
@@ -29,6 +30,7 @@ const menulist = [
   },
   { 
     text: "Profile",
+    link: "/profile",
     subMenu: [
       { link: "/profile/accountsetting", text: "Account Setting" },
       { link: "/profile/privacy", text: "Privacy" },
@@ -39,20 +41,9 @@ const menulist = [
 
 export default function DashboardSidebar() {
   const [openMenus, setOpenMenus] = useState({});
-  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { isCollapsed, toggleSidebar } = useSidebar();
-
-  // Check for mobile view
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const { isCollapsed, isMobile, toggleSidebar } = useSidebar();
 
   const toggleSubmenu = (menuText) => {
     setOpenMenus((prev) => ({
@@ -61,22 +52,54 @@ export default function DashboardSidebar() {
     }));
   };
 
-  // Close sidebar on mobile when a link is clicked
+  const handleMenuClick = (menu) => {
+    if (menu.link) {
+      router.push(menu.link);
+      if (isMobile) {
+        toggleSidebar();
+      }
+    }
+    if (menu.subMenu) {
+      toggleSubmenu(menu.text);
+    }
+  };
+
   const handleLinkClick = () => {
     if (isMobile) {
       toggleSidebar();
     }
   };
 
+  useEffect(() => {
+    const newOpenMenus = {};
+    menulist.forEach((menu) => {
+      if (menu.subMenu) {
+        const isActiveSubmenu = menu.subMenu.some(
+          (subItem) => pathname === subItem.link || pathname.startsWith(`${subItem.link}/`)
+        );
+        if (isActiveSubmenu) {
+          newOpenMenus[menu.text] = true;
+        }
+      }
+    });
+    setOpenMenus(newOpenMenus);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isMobile && !isCollapsed) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isMobile, isCollapsed]);
+
   return (
     <div className={`
       fixed h-screen z-20 transition-all duration-300
       ${isCollapsed ? "w-[70px]" : "w-[300px]"}
-      ${isMobile && !isCollapsed ? "inset-0 z-50 bg-white" : "overflow-auto"}
+      ${isMobile && !isCollapsed ? "inset-0 z-50 bg-white" : ""}
       border-r bg-white shadow-sm flex flex-col
     `}>
-  
-
       <PageLogo />
 
       <div className={`flex-1 overflow-y-auto ${isCollapsed ? "hidden" : ""}`}>
@@ -88,10 +111,13 @@ export default function DashboardSidebar() {
                 {menu.subMenu ? (
                   <>
                     <button
-                      onClick={() => toggleSubmenu(menu.text)}
+                      onClick={() => handleMenuClick(menu)}
                       className={`
                         flex items-center w-full p-2 rounded-md hover:bg-gray-100
-                        ${pathname.startsWith(menu.link || `/${menu.text.toLowerCase()}`) ? "bg-gray-100" : ""}
+                        ${pathname === menu.link || 
+                          (menu.subMenu && menu.subMenu.some(
+                            (subItem) => pathname === subItem.link || pathname.startsWith(`${subItem.link}/`)
+                          )) ? "bg-gray-100" : ""}
                       `}
                     >
                       <Image src={img} alt="" width={20} height={20} />
@@ -114,7 +140,7 @@ export default function DashboardSidebar() {
                             onClick={handleLinkClick}
                             className={`
                               block p-2 rounded-md text-sm
-                              ${pathname === subItem.link
+                              ${pathname === subItem.link || pathname.startsWith(`${subItem.link}/`)
                                 ? "text-black font-medium"
                                 : "text-gray-500 hover:text-black"
                               }
@@ -148,7 +174,7 @@ export default function DashboardSidebar() {
       </div>
 
       {!isCollapsed && (
-        <div className="p-4 text-xs text-gray-500 ">
+        <div className="p-4 text-xs text-gray-500">
           <p>© 2025 Family Federation</p>
           <p>Teachings of Dr. Hak Ja Han Moon</p>
         </div>

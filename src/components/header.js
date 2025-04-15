@@ -16,16 +16,16 @@ import {
 import { useSidebar } from "@/contexts/sidebar-context";
 
 export default function Header() {
-  const { isCollapsed } = useSidebar();
+  const { isCollapsed, isMobile } = useSidebar();
 
   return (
-    <div className={`grid grid-cols-3 border-b p-3 bg-[#EAEAEA] transition-all duration-300 ${
-      isCollapsed ? "ml-[70px]" : "ml-[300px]"
+    <div className={`grid grid-cols-3 border-b p-3 bg-[#EAEAEA] transition-all duration-300 gap-3 ${
+      isCollapsed ? "ml-[70px]" : "lg:ml-[300px]"
     }`}>
-      <div className="relative flex items-center w-full">
+      <div className="relative flex items-center col-span-2 md:col-span-1  w-full">
         <Input
           placeholder="Search"
-          className="pl-10 bg-white border-none focus:outline-none"
+          className="pl-10 w-full bg-white border-none focus:outline-none"
         />
         <Image
           src={Vector}
@@ -36,12 +36,12 @@ export default function Header() {
         />
       </div>
 
-      <div className="flex gap-6 col-span-2 items-center justify-end">
+      <div className="flex gap-2 sm-gap-4  col-span-1 md:col-span-2 items-center justify-end w-full">
         <Popover>
           <PopoverTrigger>
             <Image src={Group} alt="Group" width={18} height={18} className="cursor-pointer" />
           </PopoverTrigger>
-          <PopoverContent className="w-40">
+          <PopoverContent className="w-40 ">
             <InboxComponent/>
           </PopoverContent>
         </Popover>
@@ -57,12 +57,12 @@ export default function Header() {
 
         <Popover>
           <PopoverTrigger>
-            <Avatar className="w-10 h-10 cursor-pointer">
-              <AvatarImage src="https://github.com/shadcn.png" />
+<             Avatar className="w-8 h-8 md:w-10 md:h-10 cursor-pointer">
+                <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </PopoverTrigger>
-          <PopoverContent className="w-40">
+          <PopoverContent className="">
             <ProfilePopver/>
           </PopoverContent>
         </Popover>

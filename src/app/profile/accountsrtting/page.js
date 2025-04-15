@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function AccountSetting() {
   return (
-    <div className="p-3 bg-[#F8F8F8] space-y-6">
+    <div className=" space-y-6">
         <div>
             <h1 className="text-[#28303F] text-[40px] font-bold">Profile</h1>
 

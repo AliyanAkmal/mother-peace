@@ -8,7 +8,7 @@ import FriendRequests from "@/components/social-requests"
 import AccountLevel from "@/components/accountlevel"
 export default function Profile() {
   return (
-    <div className="p-3 bg-[#F8F8F8]">
+    <div >
       <div className="flex items-end justify-between flex-wrap gap-4 mb-4">
            <div>
             <h1 className="text-[#28303F] text-[40px] font-semibold">Profile</h1>

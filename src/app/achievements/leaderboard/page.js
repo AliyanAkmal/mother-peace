@@ -13,18 +13,18 @@ const leaderboardData = [
 
 export default function Leaderboard() {
   return (
-    <div className="p-6 bg-[#F8F8F8] space-y-8 min-h-screen">
+    <div className="space-y-8 min-h-screen">
       <div className="space-y-2">
-        <h2 className="text-4xl font-semibold text-[#28303F]">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#28303F]">
           Your Achievements
         </h2>
-        <h4 className="text-xl text-[#28303F]">John Doe</h4>
+        <h4 className="text-lg sm:text-xl text-[#28303F]">John Doe</h4>
       </div>
-      <div className="bg-white rounded-lg p-6 lg:p-8 space-y-6">
-        <div className="flex items-start  gap-3">
+      <div className="bg-white rounded-lg p-3 lg:p-8 space-y-6">
+        <div className="flex items-start gap-3">
           <Globe size={25} strokeWidth={1.5} stroke="#28303F" className="mt-[5px]" />
           <div>
-            <h4 className="text-[24px] text-[#28303F] font-semibold">
+            <h4 className="text-[24px] sm:text-[28px] text-[#28303F] font-semibold">
               Global Leaderboard
             </h4>
             <span className="text-[#828282] text-sm">
@@ -42,19 +42,19 @@ export default function Leaderboard() {
               }`}
             >
               <div className="flex items-center gap-4">
-               <div
-                cla ssName={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-semibold ${
-                  index === 0
-                    ? "bg-[#F4B940]  text-white "
-                    : index === 1
-                    ? "bg-[#5FCF65] text-white "
-                    : index === 2
-                    ? "bg-[#4A90E2]  text-white "
-                    : "text-[#0a0909] "
-                }`}
-              >
-                {index + 1} 
-              </div>
+                <div
+                  className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-semibold ${
+                    index === 0
+                      ? "bg-[#F4B940] text-white"
+                      : index === 1
+                      ? "bg-[#5FCF65] text-white"
+                      : index === 2
+                      ? "bg-[#4A90E2] text-white"
+                      : "text-[#0a0909]"
+                  }`}
+                >
+                  {index + 1} 
+                </div>
                 <Image
                   src={user.image}
                   alt={user.name}
@@ -63,7 +63,7 @@ export default function Leaderboard() {
                   className="rounded-full"
                 />
                 <div>
-                  <h5 className="text-[#28303F] font-medium">{user.name}</h5>
+                  <h5 className="text-base sm:text-lg text-[#28303F] font-medium">{user.name}</h5>
                   <p className="text-xs space-x-1 text-gray-500">
                     <span className="bg-gray-300 rounded-full px-1 py-[1px]">Level {user.level}</span>
                     <span className="text-[#5E8DE5] font-medium">
@@ -80,7 +80,7 @@ export default function Leaderboard() {
           ))}
         </div>
       </div>
-      <p className="text-[#5E8DE5] text-sm  ml-4">
+      <p className="text-[#5E8DE5] text-sm sm:text-base ml-4">
         Leaderboard updates daily. The top 3 users at the end of each month
         receive special rewards.
       </p>

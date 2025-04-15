@@ -1,7 +1,7 @@
 import { Switch } from "@/components/ui/switch"
 export default function Notifications() {
   return (
-     <div className="p-3 flex flex-col  gap-4 bg-[#F8F8F8] space-y-6 min-h-screen">
+     <div className="flex flex-col  gap-4  space-y-6 min-h-screen">
         <div>
             <h1 className="text-[#28303F] text-[40px] font-bold">Profile</h1>
             <span className="text-[#28303F] text-xl ">Notification</span>
