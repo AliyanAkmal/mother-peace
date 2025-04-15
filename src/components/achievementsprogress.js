@@ -19,20 +19,35 @@ export default function AchievementsProgress() {
     <div className="flex flex-col">
       <div className="flex justify-between mb-2">
         <div className="flex gap-3 items-center">
-          <span className="text-[#28303F] font-medium text-2xl">{achievementsData.currentLevel}</span>
-          <h4 className="text-[#28303F] font-medium text-xl">Peace Ambassador</h4>
+          <span className="text-[#28303F] font-medium text-xl sm:text-2xl">
+            {achievementsData.currentLevel}
+          </span>
+          <h4 className="text-[#28303F] font-medium text-lg sm:text-xl">
+            Peace Ambassador
+          </h4>
         </div>
         <div className="flex gap-3 items-center">
-          <h4 className="text-[#28303F] font-medium text-xl">{achievementsData.progressText}</h4>
-          <span className="text-[#28303F] font-medium text-2xl">{achievementsData.nextLevel}</span>
+          <h4 className="text-[#28303F] font-medium text-lg sm:text-xl">
+            {achievementsData.progressText}
+          </h4>
+          <span className="text-[#28303F] font-medium text-xl sm:text-2xl">
+            {achievementsData.nextLevel}
+          </span>
         </div>
       </div>
-      <Progress value={achievementsData.progress} className="h-4" />
-      <div className="flex justify-around flex-wrap mt-8">
+      <Progress value={achievementsData.progress} className="h-2 sm:h-3" />
+        <div className="flex sm:flex-row flex-col justify-around px-3 gap-2 sm:px-0 items-start mt-6">
         {achievementsData.stats.map((stat, index) => (
-          <div key={index} className="flex flex-col justify-center items-center">
-            <h2 className="text-3xl font-medium text-[#28303F]">{stat.value}</h2>
-            <h4 className="text-xl text-[#828282]">{stat.label}</h4>
+          <div 
+            key={index} 
+            className="flex flex-row sm:flex-col justify-between sm:justify-center items-center w-full sm:w-auto gap-2 sm:gap-0"
+          >
+            <h2 className="text-xl sm:text-2xl font-medium text-[#28303F]">
+              {stat.value}
+            </h2>
+            <h4 className="text-md sm:text-base text-[#828282]">
+              {stat.label}
+            </h4>
           </div>
         ))}
       </div>

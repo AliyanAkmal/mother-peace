@@ -7,7 +7,7 @@ export default function SocialLayout({ children }) {
   const pathname = usePathname();
 
   return (
-    <div className="md:px-6 bg-[#F8F8F8] md:py-2 px-2 py-4">
+    <div className=" bg-[#F8F8F8] ">
       <SocialHead
         nameProp={
           pathname === "/social/friends" ? "Invite Friends" : "Create Tribes"

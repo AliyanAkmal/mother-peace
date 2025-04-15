@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 export default function SocialHead({ nameProp }) {
   return (
-    <div className="flex  justify-between flex-wrap gap-4 my-4">
+    <div className="flex  justify-between flex-wrap gap-4 ">
       <h1 className="text-[40px] font-[600]">Social Hub</h1>
       <div className="flex items-center gap-6 flex-wrap sm:flex-nowrap">
         <Input

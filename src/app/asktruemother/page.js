@@ -9,8 +9,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 export default function AskMother() {
   return (
-    <div className="p-3 flex flex-col gap-4 bg-[#F8F8F8]">
-      {/* Header Section */}
+    <div className=" flex flex-col gap-4 ">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-[#28303F] text-2xl sm:text-3xl md:text-4xl font-bold">

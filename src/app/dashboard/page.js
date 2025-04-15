@@ -7,7 +7,7 @@ import YourContects from "@/components/yourcontects"
 
 export default function Dashboard() {
   return (
-    <div className="p-3 pb-6 flex flex-col gap-4 bg-[#F8F8F8] min-h-screen">
+    <div className=" flex flex-col gap-4 min-h-screen">
       <div className="w-full">
         <h1 className="text-[#28303F] text-2xl sm:text-3xl md:text-[40px] font-bold">Dashboard</h1>
         <h3 className="text-[#28303F] text-base sm:text-lg md:text-xl">John Doe</h3>

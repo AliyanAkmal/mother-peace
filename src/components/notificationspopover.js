@@ -29,7 +29,7 @@ const notifications = [
 
 export default function NotificationsPopOver() {
   return (
-    <div className="bg-white rounded-xl w-full max-w-md shadow-sm">
+    <div className="bg-white rounded-xl w-[75vw] sm:w-[400px] md:w-[500px]  shadow-sm absolute  right-[-40px]">
       <div className="flex justify-between items-center px-4 py-4 border-b">
         <h2 className="flex items-center gap-2">
           <span className="font-medium text-xl text-gray-900">Notifications</span>
