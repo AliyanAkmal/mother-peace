@@ -5,7 +5,7 @@ import "./globals.css";
 import DashboardSidebar from "@/components/sidebar";
 import Header from "@/components/header";
 import ContentWrapper from "@/app/wrapper";
-
+import SignupComponent from "@/app/signup/page"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,6 +34,7 @@ export default function RootLayout({
           <div className="flex h-full">
             <DashboardSidebar />
             <div className="flex-1 flex flex-col min-h-0"> 
+              {/* <SignupComponent /> */}
               <Header />
               <ContentWrapper>
                 {children}
