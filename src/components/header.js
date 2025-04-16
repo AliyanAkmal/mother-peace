@@ -41,7 +41,7 @@ export default function Header() {
           <PopoverTrigger>
             <Image src={Group} alt="Group" width={18} height={18} className="cursor-pointer" />
           </PopoverTrigger>
-          <PopoverContent className="w-40 ">
+          <PopoverContent className=" ">
             <InboxComponent/>
           </PopoverContent>
         </Popover>

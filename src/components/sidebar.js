@@ -32,7 +32,7 @@ const menulist = [
     text: "Profile",
     link: "/profile",
     subMenu: [
-      { link: "/profile/accountsetting", text: "Account Setting" },
+      { link: "/profile/accountsrtting", text: "Account Setting" },
       { link: "/profile/privacy", text: "Privacy" },
       { link: "/profile/notification", text: "Notifications" },
     ], 
