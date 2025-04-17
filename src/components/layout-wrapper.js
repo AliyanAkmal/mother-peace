@@ -15,9 +15,10 @@ export default function LayoutWrapper({ children }) {
 
   return (
     <div className="flex h-full">
-      <DashboardSidebar />
+      {pathname === "/" ? null : <DashboardSidebar />}
+
       <div className="flex-1 flex flex-col min-h-0">
-        <Header />
+        {pathname === "/" ? null : <Header />}
         <ContentWrapper>{children}</ContentWrapper>
       </div>
     </div>
