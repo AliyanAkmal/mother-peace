@@ -7,6 +7,8 @@ import {  MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Link from "next/link";
+
 
 export default function SignupComponent() {
   const formik = useFormik({
@@ -139,9 +141,9 @@ export default function SignupComponent() {
 
           <p className="text-center text-sm text-gray-500">
             Already have an account?{' '}
-            <a href="#" className="font-medium underline">
-              Click here
-            </a>
+            <Link className="underline" href="/login">
+            Click here            
+            </Link>
           </p>
         </form>
       </div>
