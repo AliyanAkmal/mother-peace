@@ -9,8 +9,11 @@ import { EyeIcon, MoveRight } from "lucide-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
+import { account } from "@/lib/appwrite";
+import { useGoogleLogin } from '@react-oauth/google';
 
 export default function LoginComponent() {
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -21,13 +24,52 @@ export default function LoginComponent() {
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string().required("Required"),
     }),
-    onSubmit: (values) => {
-      console.log("Form data", values);
+    // onSubmit: async (values) => {
+    //   try {
+    //     await account.createEmailSession(values.email, values.password);
+    //     // Redirect on successful login
+    //     window.location.href = "/dashboard";
+    //   } catch (error) {
+    //     console.error("Login error:", error);
+    //     alert("Login failed. Please check your credentials.");
+    //   }
+    // },
+  });
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const accessToken = tokenResponse.access_token;
+
+        const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch user info');
+        }
+
+        const userInfo = await res.json();
+        localStorage.setItem 
+        console.log('✅ Google User Info:', userInfo);
+        window.location.href = "/dashboard";
+        // Example fields:
+        // userInfo.email, userInfo.name, userInfo.picture
+
+      } catch (error) {
+        console.error('❌ Error fetching Google user info:', error);
+      }
+    },
+
+    onError: (errorResponse) => {
+      console.error('❌ Google login failed:', errorResponse);
     },
   });
 
   return (
-    <div className="flex  min-h-screen bg-[#f9fafb]">
+    <div className="flex min-h-screen bg-[#f9fafb]">
       <div className="w-full md:w-[44%] flex justify-center items-center">
         <form
           onSubmit={formik.handleSubmit}
@@ -48,7 +90,7 @@ export default function LoginComponent() {
               className="border border-gray-300 focus-visible:ring-0 focus-visible:ring-offset-0"
               type="email"
               name="email"
-              placeholder="kanjutajmal@gmail.com"
+              placeholder="example@gmail.com"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
@@ -102,7 +144,7 @@ export default function LoginComponent() {
           </Button>
 
           <p className="text-center text-sm text-gray-500">
-            Don’t have an account? &nbsp;
+            Don't have an account? &nbsp;
             <Link className="underline" href="/signup">
               Get Started Here
             </Link>
@@ -114,11 +156,13 @@ export default function LoginComponent() {
             <div className="flex-grow border-t border-gray-300" />
           </div>
 
-          <div className="flex justify-center">
-            <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white font-semibold text-lg">
-              G
-            </div>
-          </div>
+          <Button 
+            type="button" 
+            onClick={login}
+            className="w-full cursor-pointer"
+          >
+            <span className="mr-2">G</span> Continue With Google
+          </Button>
         </form>
       </div>
       <div className="hidden md:block w-[56%] relative">
@@ -129,7 +173,6 @@ export default function LoginComponent() {
           className="object-cover"
           priority
         />
-        <div className="relative z-10"></div>
       </div>
     </div>
   );
