@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import img from "@/assets/login.jpg";
@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { EyeIcon, MoveRight } from "lucide-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Link from "next/link";
 
 export default function LoginComponent() {
   const formik = useFormik({
@@ -83,7 +84,9 @@ export default function LoginComponent() {
                 id="remember"
                 name="remember"
                 checked={formik.values.remember}
-                onCheckedChange={(checked) => formik.setFieldValue("remember", checked)}
+                onCheckedChange={(checked) =>
+                  formik.setFieldValue("remember", checked)
+                }
               />
               <label htmlFor="remember" className="text-[#28303F]">
                 Remember me
@@ -99,10 +102,10 @@ export default function LoginComponent() {
           </Button>
 
           <p className="text-center text-sm text-gray-500">
-            Don’t have an account?{' '}
-            <a href="#" className="font-medium underline">
-              Get started here
-            </a>
+            Don’t have an account? &nbsp;
+            <Link className="underline" href="/signup">
+              Get Started Here
+            </Link>
           </p>
 
           <div className="flex items-center space-x-2">
