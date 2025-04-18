@@ -29,6 +29,11 @@ const menuItems = [
 
 export default function ProfilePopover() {
   const [activeItem, setActiveItem] = useState(1); 
+   const handleLogout = () => {
+    localStorage.removeItem('user');
+    console.log("log out");
+    router.push('/login');
+  };
 
   return (
     <div className="bg-white rounded-xl w-[75vw] sm:w-[400px] md:w-[500px] shadow-sm">
@@ -53,10 +58,10 @@ export default function ProfilePopover() {
         ))}
       </div>
       <div className="px-4 py-4">
-        <button className="w-full border border-gray-300 py-2.5 rounded-lg text-gray-900 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+        <Link    onClick={handleLogout} href="/login" className="w-full border border-gray-300 py-2.5 rounded-lg text-gray-900 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
           <LogOut size={18} />
           <span>Log out</span>
-        </button>
+        </Link>
       </div>
     </div>
   )

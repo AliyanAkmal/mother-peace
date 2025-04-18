@@ -24,49 +24,72 @@ export default function LoginComponent() {
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string().required("Required"),
     }),
-    // onSubmit: async (values) => {
-    //   try {
-    //     await account.createEmailSession(values.email, values.password);
-    //     // Redirect on successful login
-    //     window.location.href = "/dashboard";
-    //   } catch (error) {
-    //     console.error("Login error:", error);
-    //     alert("Login failed. Please check your credentials.");
-    //   }
-    // },
+   
   });
 
-  const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      try {
-        const accessToken = tokenResponse.access_token;
+  // const login = useGoogleLogin({
+  //   onSuccess: async (tokenResponse) => {
+  //     try {
+  //       const accessToken = tokenResponse.access_token;
 
-        const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+  //       const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       });
 
-        if (!res.ok) {
-          throw new Error('Failed to fetch user info');
-        }
+  //       if (!res.ok) {
+  //         throw new Error('Failed to fetch user info');
+  //       }
 
-        const userInfo = await res.json();
-        localStorage.setItem 
-        console.log('✅ Google User Info:', userInfo);
-        window.location.href = "/dashboard";
-        // Example fields:
-        // userInfo.email, userInfo.name, userInfo.picture
+  //       const userInfo = await res.json();
+  //       console.log('✅ Google User Info:', userInfo);
+  //       window.location.href = "/dashboard";
+    
+  //     } catch (error) {
 
-      } catch (error) {
-        console.error('❌ Error fetching Google user info:', error);
+  //       console.error('❌ Error fetching Google user info:', error);
+  //     }
+  //   },
+
+  //   onError: (errorResponse) => {
+  //     console.error('❌ Google login failed:', errorResponse);
+  //   },
+  // });
+const login = useGoogleLogin({
+  onSuccess: async (tokenResponse) => {
+    try {
+      const accessToken = tokenResponse.access_token;
+
+      // Fetch user info from Google
+      const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch user info');
       }
-    },
 
-    onError: (errorResponse) => {
-      console.error('❌ Google login failed:', errorResponse);
-    },
-  });
+      const userInfo = await res.json();
+      console.log('✅ Google User Info:', userInfo);
+
+      // Store user info in localStorage
+      localStorage.setItem('user', JSON.stringify(userInfo));
+
+      // Redirect to the dashboard
+      window.location.href = "/dashboard";
+    
+    } catch (error) {
+      console.error('❌ Error fetching Google user info:', error);
+    }
+  },
+
+  onError: (errorResponse) => {
+    console.error('❌ Google login failed:', errorResponse);
+  },
+});
 
   return (
     <div className="flex min-h-screen bg-[#f9fafb]">

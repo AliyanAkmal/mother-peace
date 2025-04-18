@@ -29,11 +29,11 @@ export default function Meditation() {
               <span className="text-[##28303F] text-base">March 7, 2025</span>
             </div>
           </div>
-          <box className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
             <span className="text-[#28303F] text-sm" >A guided meditation focusing on inner peace and harmony, featuring teachings from Dr. Hak Ja Han Moon.</span>
 
             <div className="bg-[#D9D9D91A] space-y-1"> 
-                <box className="flex justify-between">
+                <div className="flex justify-between">
                     <span className="text-[#28303F] text-sm flex items-center gap-1">
                         <Clock size={20} strokeWidth={1} />
                         10:00
@@ -41,18 +41,18 @@ export default function Meditation() {
                     <span className="text-[#28303F] text-sm">
                        Peace 
                     </span>
-                </box>
+                </div>
                 <Progress value={40} />
-                <box className="flex justify-between">
+                <div className="flex justify-between">
                      <span className="text-[#828282] text-sm">
                       02:22
                     </span>
                       <span className="text-[#828282] text-sm">
                        10:00
                     </span>
-                </box>
+                </div>
             </div>
-          </box>
+          </div>
             <Button className="w-full" variant="custom">
            <Play size={20} strokeWidth={2} className="mt-[3px]" />
             Start Meditation
