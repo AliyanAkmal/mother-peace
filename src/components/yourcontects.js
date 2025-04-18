@@ -3,7 +3,7 @@ import { MessageSquareDot } from "lucide-react";
 
 
 import { EllipsisVertical } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Make sure this is correctly imported
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./ui/button";
 
 const contectsData = [
@@ -25,7 +25,7 @@ const contectsData = [
   {
     name: "Blessing Giver",
     blessing: "Send 10 blessings",
-    avatarSrc: "https://example.com/image1.jpg",
+    avatarSrc: "https://example.com/image1.jpg", 
   },
 ];
 
@@ -43,8 +43,8 @@ export default function YourContects() {
       </div>
 
       {contectsData.map((data, index) => (
-        <div>
-            <div key={index} className="flex items-center justify-between mt-4">
+        <div key={index}> 
+            <div  className="flex items-center justify-between mt-4">
           <div  className="flex items-center gap-4 ">    
             <Avatar className="w-10 h-10">
             <AvatarImage src={data.avatarSrc} alt="User Avatar" />

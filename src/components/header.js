@@ -14,9 +14,29 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { useSidebar } from "@/contexts/sidebar-context";
+import { useEffect, useState } from "react";
 
 export default function Header() {
-  const { isCollapsed, isMobile } = useSidebar();
+  const { isCollapsed } = useSidebar();
+
+const [userImage, setUserImage] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+            console.log("fdsfasfsfd",user);
+        if (user?.picture) {
+          setUserImage(user.picture);
+        }
+      } catch (e) {
+        console.error("Error parsing stored user:", e);
+      }
+    } 
+  }, []);
+ 
+  
 
   return (
     <div className={`grid grid-cols-3 border-b p-3 bg-[#EAEAEA] transition-all duration-300 gap-3 ${
@@ -36,12 +56,12 @@ export default function Header() {
         />
       </div>
 
-      <div className="flex gap-2 sm-gap-4  col-span-1 md:col-span-2 items-center justify-end w-full">
+      <div className="flex gap-2 md:gap-4 col-span-1 md:col-span-2 items-center justify-end w-full">
         <Popover>
           <PopoverTrigger>
             <Image src={Group} alt="Group" width={18} height={18} className="cursor-pointer" />
           </PopoverTrigger>
-          <PopoverContent className=" ">
+          <PopoverContent>
             <InboxComponent/>
           </PopoverContent>
         </Popover>
@@ -50,20 +70,20 @@ export default function Header() {
           <PopoverTrigger>
             <Image src={notification} alt="Notifications" width={17} height={17} className="cursor-pointer" />
           </PopoverTrigger>
-          <PopoverContent className=" ">
+          <PopoverContent>
             <NotificationsPopOver/>
           </PopoverContent>
         </Popover>
 
         <Popover>
           <PopoverTrigger>
-<             Avatar className="w-8 h-8 md:w-10 md:h-10 cursor-pointer">
-                <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 cursor-pointer">
+              <AvatarImage src={userImage} />
+              <AvatarFallback>U</AvatarFallback>
             </Avatar>
           </PopoverTrigger>
-          <PopoverContent className="">
-            <ProfilePopver/>
+          <PopoverContent>
+            <ProfilePopver />
           </PopoverContent>
         </Popover>
       </div>
